@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 @Plugin(id = "lunachat",
         name = "LunaChat-velocity",
-        version = "1.2-SNAPSHOT",
+        version = "1.2.1-SNAPSHOT",
         description = "LunaChat for Velocity",
         authors = {"ucchy, YukiLeafX, LazyGon, tomo1560 (LunaChat)", "Emorard"}
 )
@@ -52,6 +52,8 @@ public class LunaChatVelocity implements PluginInterface {
 
     private File dataFolder;
     private File jarFile;
+
+    private LegacyChannelIdentifier legacyChannelIdentifier;
 
     @Subscribe
     public void onProxyInit(ProxyInitializeEvent e) {
@@ -109,7 +111,8 @@ public class LunaChatVelocity implements PluginInterface {
         LunaChat.setEventSender(new VelocityEventSender());
 
         // プラグインチャンネル登録
-        proxy.getChannelRegistrar().register(new LegacyChannelIdentifier(LunaChat.PMC_MESSAGE));
+        legacyChannelIdentifier = new LegacyChannelIdentifier(LunaChat.PMC_MESSAGE);
+        proxy.getChannelRegistrar().register(legacyChannelIdentifier);
     }
 
     public static LunaChatVelocity getInstance() {
@@ -149,6 +152,10 @@ public class LunaChatVelocity implements PluginInterface {
 
     public ProxyServer getProxy() {
         return proxy;
+    }
+
+    public LegacyChannelIdentifier getLegacyChannelIdentifier() {
+        return legacyChannelIdentifier;
     }
 
     @Override
