@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'com.github.ucchyocean'
+
+repositories {
+    mavenCentral()
+    maven {
+        name 'velocity'
+        url 'https://repo.velocitypowered.com/snapshots/'
+    }
+}
+
+dependencies {
+    compile 'org.yaml:snakeyaml:1.27'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    implementation 'org.jetbrains:annotations:13.0'
+    implementation 'com.velocitypowered:velocity-api:1.0.0-SNAPSHOT'
+    annotationProcessor 'com.velocitypowered:velocity-api:1.0.0-SNAPSHOT'
+}
+
+jar {
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }}
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

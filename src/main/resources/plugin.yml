@@ -1,0 +1,253 @@
+name: ${project.name}
+main: com.github.ucchyocean.lc3.LunaChatBukkit
+version: ${project.version}
+authors: [ucchy, YukiLeafX, LazyGon, tomo1560]
+description: ${project.description}
+softdepend: [Vault, dynmap, Multiverse-Core, mcMMO]
+
+commands:
+  lunachat:
+    description: lunachat command
+    aliases: [ch, lc]
+    usage: |
+           /<command> join (channel) - join channel.
+           /<command> leave - leave channel.
+           /<command> list - display channel list.
+           /<command> invite (name) [force] - invite the specified player to channel.
+           /<command> accept - accept the invitation.
+           /<command> deny - deny the invitation.
+           /<command> kick (name) [channel] - kick the specified player.
+           /<command> ban (name) [channel] - ban the specified player.
+           /<command> ban (name) [minutes] - ban the specified player with expiration.
+           /<command> pardon (name) [channel] - remove the ban of the specified player.
+           /<command> mute (name) [channel] - deprive the voice of the specified player.
+           /<command> mute (name) [minutes] - deprive the voice of the specified player with expiration.
+           /<command> unmute (name) [channel] - remove the voice deprivation of the specified player.
+           /<command> hide (channel) - mute the specified channel.
+           /<command> hide channel (channel) - mute the specified channel.
+           /<command> hide (player) - mute the specified player.
+           /<command> hide player (player) - mute the specified player.
+           /<command> unhide (channel) - remove the mute of the specified channel.
+           /<command> unhide channel (channel) - remove the mute of the specified channel.
+           /<command> unhide (player) - remove the mute of the specified player.
+           /<command> unhide player (player) - remove the mute of the specified player.
+           /<command> info [channel] - display the information of the channel.
+           /<command> log [channel] [key=value...] - display the logs of the channel.
+           /<command> create (channel) - create the channel.
+           /<command> remove [channel] - remove the channel.
+           /<command> format [channel] (format...) - set the message format of the channel.
+           /<command> moderator [channel] (player...) - set the specified player as the moderator.
+           /<command> dictionary (add (word) (value)|remove (word)) - add/remove the word into the japanize dictionary.
+           /<command> option (key=value...) - set the options of the channel.
+           /<command> template (number) (template...) - set the template of the message format.
+           /<command> set default (player) [channel] - set the channel to which the specified player speaks to the specified channel.
+           /<command> reload - reload config.yml.
+           /<command> help [user|mod|admin] [page] - display the usage.
+    permission: lunachat.command
+    permission-message: You don't have the permission "<permission>".
+  tell:
+    description: 1 on 1 chat command
+    aliases: [msg, message, m, t]
+    usage: /<command> (name) [message] - send 1 on 1 chat to the specified player.
+    permission: lunachat.message
+    permission-message: You don't have the permission "<permission>".
+  reply:
+    description: 1 on 1 chat reply command
+    aliases: [r]
+    usage: /<command> [message] - reply to the recieved 1 on 1 chat.
+    permission: lunachat.reply
+    permission-message: You don't have the permission "<permission>".
+  japanize:
+    description: turn on/off the japanize conversion
+    aliases: [jp]
+    usage: |
+           /<command> on|off - turn on/off the japanize conversion of your chat.
+           /<command> (player) (on|off) - turn on/off the japanize conversion of the specified player's chat.
+    permission: lunachat.japanize
+    permission-message: You don't have the permission "<permission>".
+
+permissions:
+  lunachat.command:
+    description: lunachat command permission
+    default: true
+  lunachat.join:
+    description: join command permission
+    default: true
+  lunachat.leave:
+    description: leave command permission
+    default: true
+  lunachat.list:
+    description: list command permission
+    default: true
+  lunachat.invite:
+    description: invite command permission
+    default: true
+  lunachat.accept:
+    description: accept command permission
+    default: true
+  lunachat.deny:
+    description: deny command permission
+    default: true
+  lunachat.kick:
+    description: kick command permission
+    default: true
+  lunachat.ban:
+    description: ban command permission
+    default: true
+  lunachat.pardon:
+    description: pardon command permission
+    default: true
+  lunachat.mute:
+    description: mute command permission
+    default: true
+  lunachat.unmute:
+    description: unmute command permission
+    default: true
+  lunachat.hide:
+    description: hide command permission
+    default: true
+  lunachat.unhide:
+    description: unhide command permission
+    default: true
+  lunachat.info:
+    description: info command permission
+    default: true
+  lunachat.log:
+    description: log command permission
+    default: true
+  lunachat.create:
+    description: create command permission
+    default: true
+  lunachat.remove:
+    description: remove command permission
+    default: true
+  lunachat.format:
+    description: format command permission
+    default: true
+  lunachat.moderator:
+    description: moderator command permission
+    default: true
+  lunachat.option:
+    description: option command permission
+    default: true
+  lunachat.message:
+    description: message command permission
+    default: true
+  lunachat.reply:
+    description: reply command permission
+    default: true
+  lunachat.help:
+    description: help command permission
+    default: true
+  lunachat.japanize:
+    description: japanize command permission
+    default: true
+  lunachat.allowcc:
+    description: premission to use the color codes
+    default: true
+  lunachat.*:
+    children:
+      lunachat.command: true
+      lunachat.join: true
+      lunachat.leave: true
+      lunachat.list: true
+      lunachat.invite: true
+      lunachat.accept: true
+      lunachat.deny: true
+      lunachat.kick: true
+      lunachat.ban: true
+      lunachat.pardon: true
+      lunachat.mute: true
+      lunachat.unmute: true
+      lunachat.hide: true
+      lunachat.unhide: true
+      lunachat.info: true
+      lunachat.log: true
+      lunachat.create: true
+      lunachat.remove: true
+      lunachat.format: true
+      lunachat.moderator: true
+      lunachat.option: true
+      lunachat.message: true
+      lunachat.reply: true
+      lunachat.help: true
+      lunachat.japanize: true
+      lunachat.allowcc: true
+    description: permissions for the general players
+
+  lunachat.option.description:
+    description: description command permission
+    default: true
+  lunachat.option.alias:
+    description: alias command permission
+    default: true
+  lunachat.option.color:
+    description: color command permission
+    default: true
+  lunachat.option.broadcast:
+    description: broadcast command permission
+    default: op
+  lunachat.option.range:
+    description: range command permission
+    default: op
+  lunachat.option.password:
+    description: password command permission
+    default: true
+  lunachat.option.visible:
+    description: visible command permission
+    default: true
+  lunachat.option.allowcc:
+    description: allowcc command permission
+    default: true
+  lunachat.option.japanize:
+    description: japanize command permission
+    default: true
+  lunachat.option.*:
+    children:
+      lunachat.option.description: true
+      lunachat.option.alias: true
+      lunachat.option.color: true
+      lunachat.option.broadcast: true
+      lunachat.option.range: true
+      lunachat.option.password: true
+      lunachat.option.visible: true
+      lunachat.option.allowcc: true
+      lunachat.option.japanize: true
+    description: permissions of the option command
+
+  lunachat-admin.mod-all-channels:
+    description: permission of the moderation all channels
+    default: op
+  lunachat-admin.listen-all-channels:
+    description: premission to display the chats of all channels
+    default: op
+  lunachat-admin.template:
+    description: template command permission
+    default: op
+  lunachat-admin.dictionary:
+    description: dictionary command permission
+    default: op
+  lunachat-admin.set:
+    description: set command permission
+    default: op
+  lunachat-admin.reload:
+    description: reload command permission
+    default: op
+  lunachat-admin.japanize-other:
+    description: japanize other command permission
+    default: op
+  lunachat-admin.force-invite:
+    description: force invite command permission
+    default: op
+  lunachat-admin.*:
+    children:
+      lunachat-admin.mod-all-channels: true
+      lunachat-admin.listen-all-channels: true
+      lunachat-admin.template: true
+      lunachat-admin.dictionary: true
+      lunachat-admin.set: true
+      lunachat-admin.reload: true
+      lunachat-admin.japanize-other: true
+      lunachat-admin.force-invite: true
+    description: permissions for the administrator
+    
