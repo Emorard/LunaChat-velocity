@@ -7,21 +7,29 @@ package com.github.ucchyocean.lc.velocity.event;
 
 import com.velocitypowered.api.event.ResultedEvent;
 
-public class LunaChatVelocityBaseResultedEvent extends LunaChatVelocityBaseEvent implements ResultedEvent<LunaChatVelocityResult> {
+public class LunaChatVelocityBaseResultedEvent extends LunaChatVelocityBaseEvent implements ResultedEvent<ResultedEvent.GenericResult> {
 
-    private LunaChatVelocityResult result;
+    private GenericResult result = GenericResult.allowed();
 
     public LunaChatVelocityBaseResultedEvent(String channelName) {
         super(channelName);
     }
 
+    public boolean isCancelled() {
+        return !result.isAllowed();
+    }
+
+    public void setCancelled(boolean cancelled) {
+        this.result = cancelled ? GenericResult.denied() : GenericResult.allowed();
+    }
+
     @Override
-    public LunaChatVelocityResult getResult() {
+    public GenericResult getResult() {
         return result;
     }
 
     @Override
-    public void setResult(LunaChatVelocityResult result) {
+    public void setResult(GenericResult result) {
         this.result = result;
     }
 }

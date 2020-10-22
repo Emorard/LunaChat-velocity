@@ -15,6 +15,7 @@ import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.messages.LegacyChannelIdentifier;
+import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
 import org.slf4j.Logger;
 
 
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
 
 @Plugin(id = "lunachat",
         name = "LunaChat-velocity",
-        version = "1.2.1-SNAPSHOT",
+        version = "1.3.0-SNAPSHOT",
         description = "LunaChat for Velocity",
         authors = {"ucchy, YukiLeafX, LazyGon, tomo1560 (LunaChat)", "Emorard"}
 )
@@ -112,6 +113,7 @@ public class LunaChatVelocity implements PluginInterface {
 
         // プラグインチャンネル登録
         legacyChannelIdentifier = new LegacyChannelIdentifier(LunaChat.PMC_MESSAGE);
+
         proxy.getChannelRegistrar().register(legacyChannelIdentifier);
     }
 

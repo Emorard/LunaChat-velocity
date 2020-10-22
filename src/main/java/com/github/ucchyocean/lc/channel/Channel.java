@@ -219,8 +219,9 @@ public abstract class Channel {
      */
     public void chat(ChannelMember player, String message) {
 
-        Logger log = LunaChatVelocity.getInstance().getLogger();
-        log.info("4. chat");
+        //TODO 削除する
+        //Logger log = LunaChatVelocity.getInstance().getLogger();
+        //log.info("4. chat " + message);
 
         // 発言権限を確認する
         String node = PERMISSION_SPEAK_PREFIX + "." + getName();

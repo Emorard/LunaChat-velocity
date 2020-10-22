@@ -152,6 +152,10 @@ public class VelocityEventListener {
             return;
         }
 
+        if(event.getMessage() == null) {
+            System.out.println("null!");
+        }
+
         // 発言内容を非同期で処理する
         LunaChatVelocity.getInstance().runAsyncTask(() ->
                 processChat(ChannelMember.getChannelMember(event.getPlayer()), event.getMessage()));
@@ -330,6 +334,7 @@ public class VelocityEventListener {
 
         // LunaChatPreChatEvent イベントコール
         EventResult result = LunaChat.getEventSender().sendLunaChatPreChatEvent(
+
                 channel.getName(), player, message);
         if ( result.isCancelled() ) {
             return true;
