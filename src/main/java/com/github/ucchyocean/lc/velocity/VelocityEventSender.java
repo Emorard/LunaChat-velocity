@@ -34,13 +34,11 @@ public class VelocityEventSender implements EventSenderInterface {
     @Override
     public EventResult sendLunaChatChannelChatEvent(String channelName, ChannelMember member, String originalMessage, String ngMaskedMessage, String messageFormat) {
         EventResult result = new EventResult();
-        LunaChatVelocity.PROXY.getEventManager().fire(
-                new LunaChatVelocityChannelChatEvent(channelName, member, originalMessage, ngMaskedMessage, messageFormat)
-        ).whenComplete((co, ex) -> {
-            result.setCancelled(!co.getResult().isAllowed());
-            result.setNgMaskedMessage(co.getNgMaskedMessage());
-            result.setMessageFormat(co.getMessageFormat());
-        });
+        LunaChatVelocityChannelChatEvent event = new LunaChatVelocityChannelChatEvent(channelName, member, originalMessage, ngMaskedMessage, messageFormat);
+        LunaChatVelocity.PROXY.getEventManager().fire(event);
+        result.setCancelled(event.isCancelled());
+        result.setNgMaskedMessage(event.getNgMaskedMessage());
+        result.setMessageFormat(event.getMessageFormat());
         return result;
     }
 
@@ -54,12 +52,10 @@ public class VelocityEventSender implements EventSenderInterface {
     @Override
     public EventResult sendLunaChatChannelCreateEvent(String channelName, ChannelMember member) {
         EventResult result = new EventResult();
-        LunaChatVelocity.PROXY.getEventManager().fire(
-                new LunaChatVelocityChannelCreateEvent(channelName, member)
-        ).whenComplete((co, ex) -> {
-            result.setCancelled(co.isCancelled());
-            result.setChannelName(co.getChannelName());
-        });
+        LunaChatVelocityChannelCreateEvent event = new LunaChatVelocityChannelCreateEvent(channelName, member);
+        LunaChatVelocity.PROXY.getEventManager().fire(event);
+        result.setCancelled(event.isCancelled());
+        result.setChannelName(event.getChannelName());
         return result;
     }
 
@@ -74,11 +70,9 @@ public class VelocityEventSender implements EventSenderInterface {
     @Override
     public EventResult sendLunaChatChannelMemberChangedEvent(String channelName, List<ChannelMember> before, List<ChannelMember> after) {
         EventResult result = new EventResult();
-        LunaChatVelocity.PROXY.getEventManager().fire(
-                new LunaChatVelocityChannelMemberChangedEvent(channelName, before, after)
-        ).whenComplete((co, ex) -> {
-            result.setCancelled(!co.getResult().isAllowed());
-        });
+        LunaChatVelocityChannelMemberChangedEvent event = new LunaChatVelocityChannelMemberChangedEvent(channelName, before, after);
+        LunaChatVelocity.PROXY.getEventManager().fire(event);
+        result.setCancelled(event.isCancelled());
         return result;
     }
 
@@ -96,12 +90,10 @@ public class VelocityEventSender implements EventSenderInterface {
     @Override
     public EventResult sendLunaChatChannelMessageEvent(String channelName, ChannelMember member, String message, List<ChannelMember> recipients, String displayName, String originalMessage) {
         EventResult result = new EventResult();
-        LunaChatVelocity.PROXY.getEventManager().fire(
-                new LunaChatVelocityChannelMessageEvent(channelName, member, message, recipients, displayName, originalMessage)
-        ).whenComplete((co, ex) -> {
-            result.setMessage(co.getMessage());
-            result.setRecipients(co.getRecipients());
-        });
+        LunaChatVelocityChannelMessageEvent event = new LunaChatVelocityChannelMessageEvent(channelName, member, message, recipients, displayName, originalMessage);
+        LunaChatVelocity.PROXY.getEventManager().fire(event);
+        result.setMessage(event.getMessage());
+        result.setRecipients(event.getRecipients());
         return result;
     }
 

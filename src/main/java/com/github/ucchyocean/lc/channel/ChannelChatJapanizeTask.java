@@ -5,6 +5,7 @@
  */
 package com.github.ucchyocean.lc.channel;
 
+import com.github.ucchyocean.lc.LunaChatVelocity;
 import com.github.ucchyocean.lc.japanize.JapanizeType;
 import com.github.ucchyocean.lc.member.ChannelMember;
 import com.github.ucchyocean.lc.util.ClickableFormat;
@@ -45,6 +46,7 @@ public class ChannelChatJapanizeTask implements Runnable {
     @Override
     public void run() {
         if ( task.runSync() ) {
+            LunaChatVelocity.getInstance().getLogger().info("player: " + player + "\ntask.getResult(): " + task.getResult() + "\nlineFormat: " + lineFormat);
             // チャンネルへ送信
             channel.sendMessage(player, task.getResult(), lineFormat, true);
         }

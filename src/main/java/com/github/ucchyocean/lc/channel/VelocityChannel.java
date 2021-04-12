@@ -107,6 +107,7 @@ public class VelocityChannel extends Channel {
 
         // 送信する
         if ( format != null ) {
+            LunaChatVelocity.getInstance().getLogger().info("message :" + message);
             format.replace("%msg", message);
             Component comps = format.makeTextComponent();
             for ( ChannelMember p : recipients ) {
